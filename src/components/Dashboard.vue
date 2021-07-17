@@ -20,6 +20,7 @@
         const token = auth.state.value.session.idToken.jwtToken;
         let config = {
           headers: {
+            'X-Api-Key': 'H9cqo6VCkz6oMWk1PIAf98ygUA5j8qnp38nlwtVM',
             Authorization: token,
           }
         }
