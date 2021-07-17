@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { provide} from '@vue/composition-api';
+import { provide } from '@vue/composition-api';
 import store from './store';
 export default {
   setup() {

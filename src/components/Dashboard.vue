@@ -16,7 +16,6 @@
     },
     setup() {
       const {websocket, auth, members} = inject('store');
-      console.log(auth);
       onMounted(async () => {
         const token = auth.state.value.session.idToken.jwtToken;
         let config = {

@@ -14,15 +14,12 @@ const methods = {
         state.value.connection = new WebSocket(`wss://ga9hkj72e2.execute-api.us-east-1.amazonaws.com/standup?authorization=${wssToken}`);
         state.value.connection.onmessage = event =>  {
           state.value.messages.unshift(event);
-          console.log('got message',event);
         }
-        state.value.connection.onopen = event => {
-          console.log(event)
+        state.value.connection.onopen = () => {
           console.log("Successfully connected to the websocket server...")
         }
-        state.value.connection.onclose = event => {
-          console.log(event)
-          console.log("Websocket connection closed")
+        state.value.connection.onclose = () => {
+          alert("Websocket connection closed. Refresh your browser to continue to recieve live updates.")
         }
     }
 }
