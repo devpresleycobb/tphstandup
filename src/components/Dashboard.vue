@@ -1,5 +1,11 @@
 <template>
-  <v-container class="d-flex justify-center">
+  <v-progress-circular
+    indeterminate
+    color="primary"
+    v-if="loading"
+    class="ma-auto"
+  ></v-progress-circular>
+  <v-container v-else class="d-flex justify-center">
       <member-list :status="false"></member-list>
       <member-list :status="true"></member-list>
   </v-container>
@@ -7,7 +13,7 @@
 
 
 <script>
-  import { inject, onMounted, watch } from '@vue/composition-api';
+  import { inject, onMounted, watch, ref } from '@vue/composition-api';
   import MemberList from './MemberList';
   import axios from 'axios';
   export default {
@@ -15,7 +21,8 @@
       MemberList,
     },
     setup() {
-      const {websocket, auth, members} = inject('store');
+      const { websocket, auth, members } = inject('store');
+      const loading = ref(true);
       onMounted(async () => {
         const token = auth.state.value.session.idToken.jwtToken;
         let config = {
@@ -28,6 +35,7 @@
         const {data: {results: standupMembers}} = await axios.get('https://9r95b93xyd.execute-api.us-east-1.amazonaws.com/manager', config);
         websocket.methods.setupWebsocket(wssToken);
         members.methods.setAllMembers(standupMembers);
+        loading.value = false;
         })
         watch(websocket.state.value.messages, messages => {
            const data = JSON.parse(messages[0].data);
@@ -41,6 +49,7 @@
            })
            members.methods.setAllMembers(updatedMembers);
         })
+        return {loading}
     }
   }
 </script>

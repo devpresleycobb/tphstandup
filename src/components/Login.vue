@@ -1,4 +1,5 @@
 <template>
+<!-- TODO rewrite login page to use vuetify components -->
 <body class="align">
   <div class="grid">
     <form class="form login">

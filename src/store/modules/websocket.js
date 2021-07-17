@@ -5,7 +5,7 @@ const state = ref({
     messages: [],
     allMembers: []
 })
-
+//TODO decouple members from websocket module
 const methods = {
     setAllMembers: members => {
         state.value.allMembers = members;
