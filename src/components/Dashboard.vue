@@ -9,11 +9,9 @@
       v-if="loading"
       class="ma-auto"
     ></v-progress-circular>
-    <v-container v-else >
-      <v-container class="d-flex justify-center">
-        <member-list :status="false"></member-list>
-        <member-list :status="true"></member-list>
-      </v-container>
+    <v-container v-else class="d-flex justify-center align-center">
+      <member-list :status="false"></member-list>
+      <member-list :status="true"></member-list>
     </v-container>
     </v-main>
 
@@ -38,20 +36,20 @@
       NavigationHeader,
     },
     setup() {
-      const { websocket, members } = inject('store');
+      const { websocket, members, auth } = inject('store');
       const loading = ref(true);
       onMounted(async () => {
-        // const token = auth.state.value.session.idToken.jwtToken;
-        // let config = {
-        //   headers: {
-        //     'X-Api-Key': 'H9cqo6VCkz6oMWk1PIAf98ygUA5j8qnp38nlwtVM',
-        //     Authorization: token,
-        //   }
-        // }
-        // const wssToken = await auth.methods.getWSSAuthToken(config);
-        // const {data: {results: standupMembers}} = await axios.get('https://9r95b93xyd.execute-api.us-east-1.amazonaws.com/manager', config);
-        // websocket.methods.setupWebsocket(wssToken);
-        // members.methods.setAllMembers(standupMembers);
+        const token = auth.state.value.session.idToken.jwtToken;
+        let config = {
+          headers: {
+            'X-Api-Key': 'H9cqo6VCkz6oMWk1PIAf98ygUA5j8qnp38nlwtVM',
+            Authorization: token,
+          }
+        }
+        const wssToken = await auth.methods.getWSSAuthToken(config);
+        const {data: {results: standupMembers}} = await axios.get('https://9r95b93xyd.execute-api.us-east-1.amazonaws.com/manager', config);
+        websocket.methods.setupWebsocket(wssToken);
+        members.methods.setAllMembers(standupMembers);
         loading.value = false;
         })
         watch(websocket.state.value.messages, messages => {

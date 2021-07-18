@@ -2,10 +2,12 @@
     <v-card
       width="250"
       class="mx-16"
+      height="900"
+      
     >
-      <v-list three-line>
+      <v-list three-line min-height="100%" class="list-group">
         <v-subheader>{{status ? 'Complete': 'Incomplete'}}</v-subheader>
-        <draggable class="list-group" :list="members" group="members" @end="end">
+        <draggable :list="members" group="members" @end="end">
                 <div v-for="(member) in members" :key="member.id" :id="member.id">
                     <v-list-item>
                         <v-list-item-avatar>
@@ -39,6 +41,7 @@
             let config = {
                 headers: {
                     Authorization: token,
+                    'X-Api-Key': 'H9cqo6VCkz6oMWk1PIAf98ygUA5j8qnp38nlwtVM',
                 }
             }
             axios.patch('https://9r95b93xyd.execute-api.us-east-1.amazonaws.com/manager', {id: event.item.id, status: !props.status}, config);
@@ -59,7 +62,7 @@
 </script>
 
 <style scoped>
-.list-group {
-    min-height: 100vh;
+div.list-group {
+    background-color: #f5f5f5;
 }
 </style>
