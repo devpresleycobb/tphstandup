@@ -26,9 +26,9 @@ const router = new Router({
 // Auth Middleware
 router.beforeEach(async (to, from, next) => {
     const {auth: {state}} = store;
-    if(state.value.session === null && to.name === 'login') next();
-    else if(state.value.session === null && to.meta.requiresAuth) next({name: 'login'});
-    else if(state.value.session && to.name === 'login') next({name: 'dashboard'});
-    else next()
+    if(state.value.session === null && to.name == 'login' ) next();
+    else if(state.value.session === null && to.meta.requiresAuth) next({name: 'login'})
+    else if(state.value.session && to.name === 'login') next({name: 'dashboard'})
+    else next();
 })
 export default router

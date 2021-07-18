@@ -15,9 +15,10 @@ const state = ref({
 const methods = {
     getSession: async user => 
         new Promise((resolve, reject) => {
+            if(!user) reject('User is invalid');
             user.getSession((err, session) => {
                 if(err) {
-                    reject(err);
+                    resolve(null);
                 } else {
                     resolve(session);
                 }
@@ -29,7 +30,7 @@ const methods = {
 
     },
     setSession: (payload) => {
-        state.value.session = Object.assign({}, payload);
+        state.value.session = payload
     },
     getUserPool: async poolData => new CognitoUserPool(poolData),
     getCurrentUser: async userPool => await userPool.getCurrentUser(),
