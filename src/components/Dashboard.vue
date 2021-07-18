@@ -3,16 +3,17 @@
     <drawer></drawer>
     <navigation-header></navigation-header>
     <v-main>
-      <v-progress-circular
-      indeterminate
-      color="primary"
-      v-if="loading"
-      class="ma-auto"
-    ></v-progress-circular>
-    <v-container v-else class="d-flex justify-center align-center">
-      <member-list :status="false"></member-list>
-      <member-list :status="true"></member-list>
-    </v-container>
+      <v-container v-if="loading" class="progress-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          class="progress"
+        ></v-progress-circular>
+      </v-container>
+      <v-container v-else class="d-flex justify-center align-center">
+        <member-list :status="false"></member-list>
+        <member-list :status="true"></member-list>
+      </v-container>
     </v-main>
 
     <v-footer app>
@@ -68,3 +69,13 @@
     }
   }
 </script>
+
+<style scoped>
+.progress-center {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 50vh;
+}
+
+</style>

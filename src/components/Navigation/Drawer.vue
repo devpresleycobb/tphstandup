@@ -15,7 +15,7 @@
         <v-list-item-avatar>
           <v-icon>face</v-icon>
         </v-list-item-avatar>
-        <v-list-item-title>Guest User</v-list-item-title>
+        <v-list-item-title>Anonymous User</v-list-item-title>
       </v-list-item>
 
       <v-divider></v-divider>
